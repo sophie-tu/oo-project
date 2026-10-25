@@ -1,0 +1,21 @@
+Move,Type,BasePower
+Flamethrower,Fire,90
+Ember,Fire,40
+Fire Blast,Fire,110
+Fire Fang,Fire,60
+Water Gun,Water,40
+Surf,Water,90
+Hydro Pump,Water,110
+Waterfall,Water,80
+Absorb,Grass,20
+Razor Leaf,Grass,55
+Energy Ball,Grass,90
+Seed Bomb,Grass,80
+Ice Shard,Ice,40
+Icy Wind,Ice,55
+Icicle Crash,Ice,85
+Ice Beam,Ice,90
+Rock Throw,Rock,50
+Rock Tomb,Rock,60
+Rock Slide,Rock,75
+Stone Edge,Rock,100
