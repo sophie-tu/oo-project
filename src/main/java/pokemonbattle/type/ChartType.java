@@ -1,6 +1,7 @@
 package pokemonbattle.type;
 
-import java.util.Locale;
+import pokemonbattle.data.Names;
+
 import java.util.Map;
 
 class ChartType implements Type {
@@ -14,10 +15,6 @@ class ChartType implements Type {
         this.multipliers = Map.copyOf(multipliers);
     }
 
-    static String key(String typeName) {
-        return typeName.trim().toLowerCase(Locale.ROOT);
-    }
-
     @Override
     public String getName() {
         return name;
@@ -25,7 +22,7 @@ class ChartType implements Type {
 
     @Override
     public double effectivenessAgainst(Type defender) {
-        return multipliers.getOrDefault(key(defender.getName()), NEUTRAL);
+        return multipliers.getOrDefault(Names.key(defender.getName()), NEUTRAL);
     }
 
     @Override
