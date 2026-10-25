@@ -2,6 +2,7 @@ package pokemonbattle.type;
 
 import pokemonbattle.data.CsvSource;
 import pokemonbattle.data.CsvTable;
+import pokemonbattle.data.Names;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class TypeChart {
     }
 
     public Type get(String name) {
-        Type type = typesByName.get(ChartType.key(name));
+        Type type = typesByName.get(Names.key(name));
         if (type == null) {
             throw new IllegalArgumentException("Unknown type: " + name);
         }
@@ -38,7 +39,7 @@ public class TypeChart {
     private void addType(List<String> row, List<String> defenderNames) {
         requireComplete(row, defenderNames.size());
         String name = row.get(TYPE_NAME_COLUMN);
-        typesByName.put(ChartType.key(name), new ChartType(name, readMultipliers(row, defenderNames)));
+        typesByName.put(Names.key(name), new ChartType(name, readMultipliers(row, defenderNames)));
     }
 
     private static void requireComplete(List<String> row, int expectedMultipliers) {
@@ -52,7 +53,7 @@ public class TypeChart {
         Map<String, Double> multipliers = new HashMap<>();
         for (int i = 0; i < defenderNames.size(); i++) {
             double value = Double.parseDouble(row.get(FIRST_MULTIPLIER_COLUMN + i));
-            multipliers.put(ChartType.key(defenderNames.get(i)), value);
+            multipliers.put(Names.key(defenderNames.get(i)), value);
         }
         return multipliers;
     }

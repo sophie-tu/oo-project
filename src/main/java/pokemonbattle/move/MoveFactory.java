@@ -3,12 +3,12 @@ package pokemonbattle.move;
 import pokemonbattle.type.TypeChart;
 import pokemonbattle.data.CsvSource;
 import pokemonbattle.data.RandomSource;
+import pokemonbattle.data.Names;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class MoveFactory {
@@ -23,12 +23,12 @@ public class MoveFactory {
         this.random = random;
         for (List<String> row : source.read().rows()) {
             Move move = toMove(row, types);
-            movesByName.put(key(move.name()), move);
+            movesByName.put(Names.key(move.name()), move);
         }
     }
 
     public Move create(String name) {
-        Move move = movesByName.get(key(name));
+        Move move = movesByName.get(Names.key(name));
         if (move == null) {
             throw new IllegalArgumentException("Unknown move: " + name);
         }
@@ -60,9 +60,5 @@ public class MoveFactory {
                 types.get(row.get(TYPE_COLUMN)),
                 Integer.parseInt(row.get(POWER_COLUMN))
         );
-    }
-
-    private static String key(String name) {
-        return name.trim().toLowerCase(Locale.ROOT);
     }
 }
