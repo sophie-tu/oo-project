@@ -20,4 +20,11 @@ public class MoveTest {
     void moveWithBlankNameThrows() {
         assertThrows(IllegalArgumentException.class, () -> new Move(" ", water, 40));
     }
+    @Test
+    void superEffectiveMoveDoublesDamage() {
+        TypeChart types = new TypeChart(new ResourceCsvSource("/data/type_chart.csv"));
+        Move waterGun = new Move("Water Gun", types.get("Water"), 40);
+
+        assertEquals(80, waterGun.damageAgainst(types.get("Fire")));
+    }
 }

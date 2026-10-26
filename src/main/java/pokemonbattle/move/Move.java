@@ -19,4 +19,8 @@ public record Move(String name, Type type, int basePower) {
     public String toString() {
         return name + " (" + type.getName() + ", " + basePower + ")";
     }
+
+    public int damageAgainst(Type defender){
+        return (int) Math.round(basePower * type.effectivenessAgainst(defender));
+    }
 }
