@@ -30,7 +30,7 @@ All game data (type chart, Pokemon stats, moves) is loaded from CSV files in
 | `pokemonbattle.type` | Types and the effectiveness chart (`Type`, `TypeChart`) |
 | `pokemonbattle.move` | Moves and the move factory (`Move`, `MoveFactory`) |
 | `pokemonbattle.pokemon` | Pokemon, its Builder, and the Pokemon factory (`Pokemon`, `PokemonFactory`) |
-| `pokemonbattle.battle` | Battle, move selection strategies, battle listeners (TODO: Akhil) |
+| `pokemonbattle.battle` | Battle, move selection strategies, battle listeners |
 
 ## Design patterns
 
@@ -73,9 +73,16 @@ the other 9, and `MoveFactory.randomMoves(4)` picks the computer's moves.
 **Factory vs. Builder:** the Factory decides *which* object to create. The
 Builder handles *how* to assemble a complex object step by step.
 
-### 3. Strategy: `MoveSelectionStrategy` (TODO: Akhil)
+### 3. Strategy: `MoveSelectionStrategy`
+**Problem:** :the computer needs a way to pick its move each turn, and Battle shouldn’t be tied to one way of choosing.
+**How we use it**: MoveStrategy is an interface with one method, selectMove(attacker, defender). It has two implementations: RandomMoveSelection picks a random move from the attacker’s list, and BestMatchupMoveSelection picks the move that deals the most damage to the defender. Battle only knows the interface, and a strategy is passed in through its constructor.
+**Why it fits**: adding a new way to choose (for example a human prompt) means adding a class, not editing Battle.
+Damage rule: damage is basePower × effectiveness, rounded to the nearest whole number (Move.damageAgainst). Both the battle and the best-matchup strategy use the same method.
 
-### 4. Observer: `BattleListener` (TODO: Akhil)
+### 4. Observer: `BattleListener` 
+**Problem**: the battle needs to report what happens without knowing where the output goes.
+**How we use it**: Battle is the subject. BattleListener has four methods: move used, damage dealt, Pokémon fainted, and battle ended. ConsoleBattleListener prints each one. Battle calls every listener it was given and never prints anything itself.
+**Why it fits**: a Swing listener can be added later without changing Battle.
 
 ## OO principles
 
@@ -131,5 +138,4 @@ There are 45 test methods (54 test runs). Some highlights:
 
 TODO (Akhil): battle, strategy, and listener tests
 
-## Test coverage
-TODO: paste screenshot
+
