@@ -135,7 +135,7 @@ There are 45 test methods (54 test runs). Some highlights:
 | `PokemonFactoryTest.eachCreateReturnsANewPokemon` | Two battles never share one Pokemon |
 | `PokemonFactoryTest.randomOpponentIsNeverThePlayersChoice` | Runs for every random value 0–8; the computer never gets the player's Pokemon |
 | `MoveFactoryTest.randomMovesHasNoDuplicates` | The computer's 4 random moves are all different |
-
-TODO (Akhil): battle, strategy, and listener tests
+|`MoveTest.superEffectiveMoveDoublesDamage`|Water Gun (40) vs. Fire = 80 damage|
+|`ConsoleBattleListenerTest.announcesDamageAndRemainingHp`| The listener reports "Typhlosion took 10 damage (68/78 HP left)."|
 
 
