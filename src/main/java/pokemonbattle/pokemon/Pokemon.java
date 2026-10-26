@@ -66,9 +66,12 @@ public class Pokemon {
         if (amount < 0) {
             throw new IllegalArgumentException("Damage amount cannot be negative: " + amount);
         }
-        int dealt = Math.min(amount, currentHp);
-        currentHp -= dealt;
-        return dealt;
+        if (amount > currentHp){
+            int hpLost=currentHp;
+            currentHp = 0;
+        return  hpLost;}
+        currentHp -= amount;
+        return amount;
     }
 
     public boolean isFainted() {
